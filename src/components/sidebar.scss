@@ -1,0 +1,24 @@
+.side-bar{
+    user-select: none;
+    width: 16vw;
+    height: 100vh;
+    background-color:#f1f2f3;
+    position: absolute;
+    top: 11.5%;
+    left: 20.3%;
+    padding-top: 65px;
+    border-right: 1px solid #f4f5f6;
+
+div{
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    &.active{
+        background-color: white;
+    }
+}
+}
+.icon{
+    margin-right: 10px;
+
+}
