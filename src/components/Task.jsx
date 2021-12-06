@@ -62,37 +62,34 @@ const T_Header_MAPP = {
 };
 
 const TaskITems = ({ selectedTab, tasks }) => {
+  let tasktoRender=[...tasks];
+
   if (selectedTab === "NEXT_7") {
-    return tasks
-      .filter(
+    tasktoRender=tasktoRender.filter(
         (task) =>
           isAfter(task.date, new Date()) &&
           isBefore(task.date, addDays(new Date(), 7))
-      )
-      .map((task) => (
-        <p>
-          {task.text}
-          {dateFnsFormat(new Date(task.date), FORMAT)}{" "}
-        </p>
-      ));
+      );
   }
   if (selectedTab === "TODAY") {
-    return tasks
-      .filter((task) => isToday(task.date))
-      .map((task) => (
-        <p>
-          {task.text}
-          {dateFnsFormat(new Date(task.date), FORMAT)}{" "}
-        </p>
-      ));
+    tasktoRender=tasktoRender.filter((task) => isToday(task.date));
   }
-  return tasks.map((task) => (
-    <p>
-      {task.text}
-      {dateFnsFormat(new Date(task.date), FORMAT)}
-      {"  "}
-    </p>
-  ));
+  return(
+    <div className="task-item-container">
+
+     { tasktoRender.map((task)=>(
+       <div className="task-item1">
+         <p>
+         {task.text}
+         </p>
+         <p>
+         {dateFnsFormat(new Date(task.date), FORMAT)}
+         </p>
+       </div>
+     
+      ))}
+    </div>
+  )
 };
 
 const Task = ({ selectedTab }) => {
@@ -109,10 +106,10 @@ const Task = ({ selectedTab }) => {
     <div className="task-bar">
       <h1>{T_Header_MAPP[selectedTab]}</h1>
 
-      <div className="add-class-btn" onClick={() => setshowAddTask((e) => !e)}>
+      {selectedTab==="INBOX" ? <div className="add-class-btn" onClick={() => setshowAddTask((e) => !e)}>
         <span className="plus">+</span>
         <span className="add-text">Add task</span>
-      </div>
+      </div> : null}
       {showAddTask && (
         <Addtask
           onAddTask={addNewTask}

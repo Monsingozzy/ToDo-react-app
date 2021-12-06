@@ -71,3 +71,10 @@ h1 {
 .icon-container {
   margin-top: 20px;
 }
+.task-item1{
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-child){
+        border-bottom: 1px solid red;
+    }
+}
